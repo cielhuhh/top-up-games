@@ -115,23 +115,25 @@ export default function HomeClient({ games }: { games: any[] }) {
           >
             {popularGames.map((game: any) => (
               <motion.div variants={itemVariants} key={game.id}>
-                <Link href={`/game/${game.id}`} className="group cursor-pointer block h-full">
-                  <div className="glass-card overflow-hidden h-full flex flex-col p-3 transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_10px_30px_rgba(67,118,187,0.15)] bg-dark-bg/40 border border-dark-border/60">
-                    <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 border border-dark-border/50">
+                <Link href={`/game/${game.id}`} className="group cursor-pointer block h-full relative">
+                  <div className="absolute -inset-0.5 bg-gradient-to-br from-brand-500 to-accent-purple rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-500"></div>
+                  <div className="glass-card overflow-hidden h-full flex flex-col p-3 transition-all duration-500 group-hover:-translate-y-2 bg-dark-bg/60 border border-dark-border/60 relative z-10 group-hover:border-brand-500/30">
+                    <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 border border-dark-border/50 ring-1 ring-inset ring-white/10 group-hover:ring-brand-500/30">
                       <Image 
                         src={game.imageUrl} 
                         alt={game.name} 
                         fill 
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                        <span className="bg-brand-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg border border-brand-400/30">Pilih Game</span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-4">
+                        <span className="bg-brand-500/90 text-white text-xs font-bold px-5 py-2 rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)] border border-brand-400/50 backdrop-blur-md transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Top Up Sekarang</span>
                       </div>
                     </div>
-                    <div className="flex-1 flex flex-col items-center text-center mt-2">
-                      <h3 className="font-bold text-lg text-theme-text mb-1 leading-tight group-hover:text-brand-500 transition-colors drop-shadow-sm">{game.name}</h3>
-                      <p className="text-xs text-brand-400/80 uppercase tracking-widest font-semibold">{game.publisher}</p>
+                    <div className="flex-1 flex flex-col items-center text-center mt-2 relative">
+                      <div className="absolute -top-10 right-0 w-8 h-8 bg-brand-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <h3 className="font-extrabold text-lg text-theme-text mb-1 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-300 group-hover:to-accent-neonBlue transition-all drop-shadow-sm">{game.name}</h3>
+                      <p className="text-[10px] text-brand-400/80 uppercase tracking-[0.2em] font-bold">{game.publisher}</p>
                     </div>
                   </div>
                 </Link>
@@ -162,9 +164,9 @@ export default function HomeClient({ games }: { games: any[] }) {
             >
               {otherGames.map((game: any) => (
                 <motion.div variants={itemVariants} key={game.id}>
-                  <Link href={`/game/${game.id}`} className="group cursor-pointer block h-full">
-                    <div className="glass-card overflow-hidden h-full flex flex-col p-3 transition-transform duration-300 group-hover:-translate-y-2 bg-dark-bg/40 border border-dark-border/60">
-                      <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 bg-dark-border">
+                  <Link href={`/game/${game.id}`} className="group cursor-pointer block h-full relative">
+                    <div className="glass-card overflow-hidden h-full flex flex-col p-3 transition-all duration-300 group-hover:-translate-y-1 bg-dark-bg/40 border border-dark-border/60 group-hover:border-dark-border group-hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+                      <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 bg-dark-border border border-dark-border/30">
                         <Image 
                           src={game.imageUrl} 
                           alt={game.name} 
@@ -172,10 +174,11 @@ export default function HomeClient({ games }: { games: any[] }) {
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                           sizes="(max-width: 768px) 50vw, 20vw"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                       <div className="flex-1 flex flex-col items-center text-center">
-                        <h3 className="font-bold text-base text-theme-text mb-1 leading-tight group-hover:text-brand-400 transition-colors">{game.name}</h3>
-                        <p className="text-xs text-theme-muted">{game.publisher}</p>
+                        <h3 className="font-bold text-base text-theme-text mb-1 leading-tight group-hover:text-brand-300 transition-colors">{game.name}</h3>
+                        <p className="text-xs text-theme-muted group-hover:text-theme-muted/80">{game.publisher}</p>
                       </div>
                     </div>
                   </Link>

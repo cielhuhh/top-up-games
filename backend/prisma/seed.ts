@@ -14,7 +14,7 @@ async function main() {
     data: {
       name: "Mobile Legends",
       publisher: "Moonton",
-      imageUrl: "https://play-lh.googleusercontent.com/xebXhyQIK_kksg8C4Oms1P4t8p4fP13tF0w11pGzUaL0Vn6R7e29W2cZbMiy50K_cQ",
+      imageUrl: "/images/mlbb.png",
       description: "Top up Diamonds Mobile Legends: Bang Bang",
       isPopular: true,
       products: {
@@ -35,7 +35,7 @@ async function main() {
     data: {
       name: "Free Fire",
       publisher: "Garena",
-      imageUrl: "https://play-lh.googleusercontent.com/yU4ECA_T5qVd998Fz8i7kY5lJvN_I1Y4G4h_8q5c6i7Z0C4cR_S6c28fB8_7B0D_o_k",
+      imageUrl: "/images/ff.png",
       description: "Top up Diamonds Garena Free Fire",
       isPopular: true,
       products: {
@@ -54,7 +54,7 @@ async function main() {
     data: {
       name: "Valorant",
       publisher: "Riot Games",
-      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Valorant_logo_-_pink_color_version.svg/2560px-Valorant_logo_-_pink_color_version.svg.png",
+      imageUrl: "/images/valorant.png",
       description: "Top up Valorant Points (VP)",
       isPopular: true,
       products: {

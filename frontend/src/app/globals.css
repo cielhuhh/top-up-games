@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: 244 244 245; /* Light mode bg: zinc-100 (#f4f4f5) */
+    --bg-card: 255 255 255; /* Light mode card: white (#ffffff) */
+    --border-main: 228 228 231; /* Light mode border: zinc-200 (#e4e4e7) */
+    --text-main: 24 24 27; /* Light mode text: zinc-900 (#18181b) */
+    --text-muted: 82 82 91; /* Light mode muted text: zinc-600 (#52525b) */
+    --pattern-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .dark {
+    --bg-main: 9 9 11; /* Dark mode bg: zinc-950 (#09090b) */
+    --bg-card: 24 24 27; /* Dark mode card: zinc-900 (#18181b) */
+    --border-main: 39 39 42; /* Dark mode border: zinc-800 (#27272a) */
+    --text-main: 255 255 255; /* Dark mode text: white (#ffffff) */
+    --text-muted: 156 163 175; /* Dark mode muted text: gray-400 (#9ca3af) */
+    --pattern-color: rgba(255, 255, 255, 0.03);
+  }
+
+  body {
+    @apply bg-dark-bg text-theme-text antialiased selection:bg-brand-500/30 selection:text-brand-300 transition-colors duration-300 min-h-screen relative;
+  }
+  
+  /* Background subtle pattern */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at center, var(--pattern-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  /* Premium Glassmorphism Cards */
+  .glass-card {
+    @apply bg-dark-card/50 backdrop-blur-2xl rounded-2xl shadow-lg transition-all duration-500 hover:border-brand-500/30 hover:shadow-[0_8px_40px_-12px_rgba(14,165,233,0.3)] hover:bg-dark-card/80 hover:-translate-y-1 relative overflow-hidden;
+  }
+  
+  /* Subtle inner glow for cards */
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Primary Action Button - Elegant Gold/Blue */
+  .btn-primary {
+    @apply relative overflow-hidden bg-gradient-to-r from-brand-500 to-brand-400 text-white font-bold tracking-wide py-3 px-6 rounded-xl shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed border border-brand-300/20;
+  }
+
+  /* Soft neon text effect */
+  .text-neon {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-accent-neonBlue filter drop-shadow-[0_0_12px_rgba(105,150,208,0.4)];
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-dark-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-border rounded-full hover:bg-brand-500/50 transition-colors;
+}

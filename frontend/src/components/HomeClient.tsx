@@ -37,7 +37,7 @@ export default function HomeClient({ games }: { games: any[] }) {
             className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 text-theme-text"
           >
             Top Up Game <br /> 
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-accent-neonBlue">Super Cepat & Elegan</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-accent-neonBlue">Aman, Cepat & Terpercaya</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}

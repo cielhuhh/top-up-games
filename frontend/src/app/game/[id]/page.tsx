@@ -159,11 +159,11 @@ export default function GameDetail({ params }: { params: { id: string } }) {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {game.products?.map((product: any) => (
                   <motion.div 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     key={product.id}
                     onClick={() => setSelectedProduct(product)}
-                    className={`cursor-pointer rounded-xl p-4 transition-all duration-300 border-2 overflow-hidden relative ${selectedProduct?.id === product.id ? 'bg-brand-500/10 border-brand-500 shadow-[0_0_15px_rgba(20,184,166,0.2)]' : 'bg-dark-bg border-dark-border hover:border-gray-500'}`}
+                    className={`cursor-pointer rounded-xl p-4 transition-all duration-300 border-2 overflow-hidden relative group ${selectedProduct?.id === product.id ? 'bg-gradient-to-br from-brand-600/20 to-accent-purple/20 border-brand-400 shadow-[0_0_20px_rgba(14,165,233,0.3)] ring-2 ring-brand-400/50 scale-[1.02] z-10' : 'bg-dark-card border-dark-border hover:border-brand-500/50 hover:shadow-[0_4px_20px_rgba(0,0,0,0.3)]'}`}
                   >
                     {selectedProduct?.id === product.id && (
                        <div className="absolute top-0 right-0 w-8 h-8 bg-brand-500 rounded-bl-2xl flex items-center justify-center text-white font-bold text-xs shadow-[-2px_2px_10px_rgba(20,184,166,0.5)]">
@@ -190,19 +190,26 @@ export default function GameDetail({ params }: { params: { id: string } }) {
                 <Wallet size={18} />
               </div>
               <h2 className="text-xl font-bold mb-6 text-theme-text border-b border-dark-border pb-4">Pilih Pembayaran</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {['Qris', 'Gopay', 'Dana', 'Ovo', 'ShopeePay', 'BCA Virtual Account'].map((method, idx) => (
                   <motion.div 
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     key={method}
                     onClick={() => setPaymentMethod(method)}
-                    className={`cursor-pointer rounded-xl p-4 flex items-center justify-between transition-all duration-300 border-2 ${paymentMethod === method ? 'bg-accent-purple/10 border-accent-purple shadow-[0_0_15px_rgba(139,92,246,0.2)]' : 'bg-dark-bg border-dark-border hover:border-gray-500'}`}
+                    className={`cursor-pointer rounded-xl p-4 flex flex-col justify-between transition-all duration-300 border-2 min-h-[100px] ${paymentMethod === method ? 'bg-accent-purple/10 border-accent-purple shadow-[0_0_15px_rgba(139,92,246,0.2)] ring-2 ring-accent-purple/30 z-10' : 'bg-dark-card border-dark-border hover:border-accent-purple/50'}`}
                   >
-                    <span className={`font-bold transition-colors ${paymentMethod === method ? 'text-theme-text' : 'text-theme-muted'}`}>{method}</span>
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${paymentMethod === method ? 'border-accent-purple' : 'border-gray-600'}`}>
-                      {paymentMethod === method && <motion.div layoutId="payment-dot" className="w-2.5 h-2.5 rounded-full bg-accent-purple shadow-[0_0_8px_rgba(139,92,246,0.8)]"></motion.div>}
+                    <div className="flex justify-between items-start mb-2">
+                       <span className={`font-bold text-sm transition-colors ${paymentMethod === method ? 'text-theme-text' : 'text-theme-muted'}`}>{method}</span>
+                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${paymentMethod === method ? 'border-accent-purple' : 'border-gray-600'}`}>
+                         {paymentMethod === method && <motion.div layoutId="payment-dot" className="w-2.5 h-2.5 rounded-full bg-accent-purple shadow-[0_0_8px_rgba(139,92,246,0.8)]"></motion.div>}
+                       </div>
                     </div>
+                    {selectedProduct && paymentMethod === method && (
+                       <div className="text-brand-400 font-extrabold text-sm mt-auto">
+                        {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(selectedProduct.price)}
+                       </div>
+                    )}
                   </motion.div>
                 ))}
               </div>
@@ -251,20 +258,31 @@ export default function GameDetail({ params }: { params: { id: string } }) {
                     </motion.span>
                   </AnimatePresence>
                 </div>
-                <div className="pt-4 border-t border-dark-border flex justify-between items-center text-lg mt-2">
-                  <span className="text-theme-muted font-bold">Total Harga</span>
+                <div className="pt-4 border-t border-dark-border flex justify-between items-center mt-2 pb-2">
+                  <span className="text-theme-muted font-bold text-lg">Total Harga</span>
                   <AnimatePresence mode="popLayout">
                     <motion.span 
                       key={selectedProduct ? selectedProduct.price : '0'}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="font-extrabold text-brand-400 text-xl"
+                      className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-accent-neonBlue text-3xl drop-shadow-sm"
                     >
                       {selectedProduct ? new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(selectedProduct.price) : 'Rp 0'}
                     </motion.span>
                   </AnimatePresence>
                 </div>
               </div>
+
+              {(!selectedProduct || !gameUserId || !paymentMethod) && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs text-center p-3 rounded-lg font-medium mb-4 flex items-center justify-center gap-2"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                  Harap lengkapi User ID, Nominal, & Metode
+                </motion.div>
+              )}
 
               <motion.button 
                 whileHover={(!isSubmitting && selectedProduct && gameUserId && paymentMethod) ? { scale: 1.05 } : {}}

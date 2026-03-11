@@ -4,25 +4,17 @@
 
 @layer base {
   :root {
-    --bg-main: 244 244 245; /* Light mode bg: zinc-100 (#f4f4f5) */
-    --bg-card: 255 255 255; /* Light mode card: white (#ffffff) */
-    --border-main: 228 228 231; /* Light mode border: zinc-200 (#e4e4e7) */
-    --text-main: 24 24 27; /* Light mode text: zinc-900 (#18181b) */
-    --text-muted: 82 82 91; /* Light mode muted text: zinc-600 (#52525b) */
-    --pattern-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .dark {
-    --bg-main: 9 9 11; /* Dark mode bg: zinc-950 (#09090b) */
-    --bg-card: 24 24 27; /* Dark mode card: zinc-900 (#18181b) */
-    --border-main: 39 39 42; /* Dark mode border: zinc-800 (#27272a) */
-    --text-main: 255 255 255; /* Dark mode text: white (#ffffff) */
-    --text-muted: 156 163 175; /* Dark mode muted text: gray-400 (#9ca3af) */
-    --pattern-color: rgba(255, 255, 255, 0.03);
+    /* Codashop-like Deep Dark Theme (Permanent) */
+    --bg-main: 15 23 42; /* slate-900 (#0f172a) */
+    --bg-card: 30 41 59; /* slate-800 (#1e293b) */
+    --border-main: 51 65 85; /* slate-700 (#334155) */
+    --text-main: 248 250 252; /* slate-50 (#f8fafc) */
+    --text-muted: 148 163 184; /* slate-400 (#94a3b8) */
+    --pattern-color: rgba(255, 255, 255, 0.02);
   }
 
   body {
-    @apply bg-dark-bg text-theme-text antialiased selection:bg-brand-500/30 selection:text-brand-300 transition-colors duration-300 min-h-screen relative;
+    @apply bg-dark-bg text-theme-text antialiased selection:bg-brand-500/30 selection:text-brand-300 min-h-screen relative;
   }
   
   /* Background subtle pattern */

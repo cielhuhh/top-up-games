@@ -2,24 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Menu, X } from 'lucide-react';
 import LoginModal from './LoginModal';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="fixed w-full z-50 glass-card rounded-none border-x-0 border-t-0 bg-dark-bg/80 backdrop-blur-md">
+    <nav className={`fixed w-full z-50 transition-all duration-500 rounded-none border-x-0 border-t-0 ${scrolled ? 'bg-dark-bg/85 backdrop-blur-2xl border-b border-brand-500/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-1' : 'bg-gradient-to-b from-dark-bg/80 to-transparent backdrop-blur-sm border-b border-transparent py-3'}`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -41,19 +45,9 @@ export default function Navbar() {
 
         {/* Login Button (Desktop) */}
         <div className="hidden md:flex items-center gap-4">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 text-theme-muted hover:text-brand-400 transition-colors bg-dark-card border border-dark-border rounded-lg"
-              aria-label="Toggle Dark Mode"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          )}
-
           <button 
             onClick={() => setIsLoginModalOpen(true)}
-            className="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors"
+            className="btn-primary py-2 px-6"
           >
             Masuk
           </button>
@@ -61,14 +55,6 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-4">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 text-theme-muted hover:text-brand-400 transition-colors bg-dark-card border border-dark-border rounded-lg"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          )}
           <button className="text-theme-text hover:text-brand-400 transition-colors" onClick={toggleMenu}>
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
